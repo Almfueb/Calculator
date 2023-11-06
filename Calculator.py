@@ -3,9 +3,11 @@ from tkinter import *
 def button_press(num):
 
     global equation_text
-
+    if num == 'x':
+        num = '*'
+    elif num == '÷':
+        num = '/'
     equation_text = equation_text + str(num)
-
     equation_label.set(equation_text)
 
 def equals():
@@ -15,29 +17,21 @@ def equals():
     try:
 
         total = str(eval(equation_text))
-
         equation_label.set(total)
-
         equation_text = total
 
     except SyntaxError:
-
         equation_label.set("syntax error")
-
         equation_text = ""
 
     except ZeroDivisionError:
-
         equation_label.set("arithmetic error")
-
         equation_text = ""
 
 def clear():
 
     global equation_text
-
     equation_label.set("")
-
     equation_text = ""
 
 def backspace():
@@ -45,12 +39,21 @@ def backspace():
     equation_text = equation_text[:-1]
     equation_label.set(equation_text)
 
+def evaluate(event=None):
+    equals()
+
 def key_press(event):
     if event.char.isdigit()or event.char in ['+', '-', 'x', '/', '.', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0']:
         button_press(event.char)
 
     elif event.keysym == 'BackSpace':
         backspace()
+
+    elif event.keysym == 'Return':
+        evaluate()
+
+    elif event.keysym == 'Escape':
+        clear()
 
 
 window = Tk()
@@ -105,10 +108,10 @@ plus.grid(row=0, column=3)
 minus = Button(frame, text='-', height=4, width=9, font=35,command=lambda: button_press('-'))
 minus.grid(row=1, column=3)
 
-multiply = Button(frame, text='*', height=4, width=9, font=35,command=lambda: button_press('*'))
+multiply = Button(frame, text='x', height=4, width=9, font=35, command=lambda: button_press('x'))
 multiply.grid(row=2, column=3)
 
-divide = Button(frame, text='/', height=4, width=9, font=35,command=lambda: button_press('/'))
+divide = Button(frame, text='÷', height=4, width=9, font=35,command=lambda: button_press('/'))
 divide.grid(row=3, column=3)
 
 equal = Button(frame, text='=', height=4, width=9, font=35,command=equals)
