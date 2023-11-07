@@ -28,6 +28,16 @@ def equals():
         equation_label.set("arithmetic error")
         equation_text = ""
 
+def percent():
+    global equation_text
+    try:
+        result = str(eval(equation_text) / 100)
+        equation_label.set(result)
+        equation_text = result
+    except:
+        equation_label.set("Error")
+        equation_text = ""
+
 def clear():
 
     global equation_text
@@ -43,7 +53,7 @@ def evaluate(event=None):
     equals()
 
 def key_press(event):
-    if event.char.isdigit()or event.char in ['+', '-', 'x', '/', '.', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0']:
+    if event.char.isdigit()or event.char in ['+', '-', 'x', '/', '.', '%', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0']:
         button_press(event.char)
 
     elif event.keysym == 'BackSpace':
@@ -53,7 +63,10 @@ def key_press(event):
         evaluate()
 
     elif event.keysym == 'Escape':
-        clear()
+        clear.pack()
+
+    elif event.keysym == 'c':
+        quit()
 
 
 window = Tk()
@@ -100,7 +113,10 @@ button9 = Button(frame, text=9, height=4, width=9, font=35,command=lambda: butto
 button9.grid(row=2, column=2)
 
 button0 = Button(frame, text=0, height=4, width=9, font=35,command=lambda: button_press(0))
-button0.grid(row=3, column=0)
+button0.grid(row=3, column=1)
+
+percent = Button(frame, text='%', height=4, width=9, font=35, command=percent)
+percent.grid(row=4, column = 2)
 
 plus = Button(frame, text='+', height=4, width=9, font=35,command=lambda: button_press('+'))
 plus.grid(row=0, column=3)
@@ -118,9 +134,9 @@ equal = Button(frame, text='=', height=4, width=9, font=35,command=equals)
 equal.grid(row=3, column=2)
 
 decimal = Button(frame, text='.', height=4, width=9, font=35,command=lambda: button_press('.'))
-decimal.grid(row=3, column=1)
+decimal.grid(row=3, column=0)
 
-clear = Button(window, text='clear', height=4, width=12, font=35,command=clear)
-clear.pack()
+clear = Button(frame, text='clear', height=4, width=9, font=35,command=clear)
+clear.grid(row=4, column=1)
 
 window.mainloop()
