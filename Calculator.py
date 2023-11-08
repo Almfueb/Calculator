@@ -38,7 +38,7 @@ def percent():
         equation_label.set("Error")
         equation_text = ""
 
-def clear():
+def clear_label():
 
     global equation_text
     equation_label.set("")
@@ -63,7 +63,7 @@ def key_press(event):
         evaluate()
 
     elif event.keysym == 'Escape':
-        clear.pack()
+        clear_label()
 
     elif event.keysym == 'c':
         quit()
@@ -71,17 +71,18 @@ def key_press(event):
 
 window = Tk()
 window.title("Calculator program")
-window.geometry("500x500")
+window.geometry("500x550")
 
 equation_text = ""
 
 equation_label = StringVar()
 
-label = Label(window, textvariable=equation_label, font=('consolas',20), bg="white", width=24, height=2)
-label.pack()
+label = Label(window, textvariable=equation_label, font=('consolas',20), bg="white", width=27, height=2, bd=4, relief="ridge")
+label.pack(pady=10)
+
 
 frame = Frame(window)
-frame.pack()
+frame.pack(pady=10)
 
 window.bind("<Key>", key_press)
 
@@ -115,9 +116,6 @@ button9.grid(row=2, column=2)
 button0 = Button(frame, text=0, height=4, width=9, font=35,command=lambda: button_press(0))
 button0.grid(row=3, column=1)
 
-percent = Button(frame, text='%', height=4, width=9, font=35, command=percent)
-percent.grid(row=4, column = 2)
-
 plus = Button(frame, text='+', height=4, width=9, font=35,command=lambda: button_press('+'))
 plus.grid(row=0, column=3)
 
@@ -130,13 +128,16 @@ multiply.grid(row=2, column=3)
 divide = Button(frame, text='÷', height=4, width=9, font=35,command=lambda: button_press('/'))
 divide.grid(row=3, column=3)
 
-equal = Button(frame, text='=', height=4, width=9, font=35,command=equals)
-equal.grid(row=3, column=2)
-
 decimal = Button(frame, text='.', height=4, width=9, font=35,command=lambda: button_press('.'))
 decimal.grid(row=3, column=0)
 
-clear = Button(frame, text='clear', height=4, width=9, font=35,command=clear)
-clear.grid(row=4, column=1)
+clear = Button(frame, text='clear', height=4, width=9, font=35,command=clear_label)
+clear.grid(row=3, column=2)
+
+percent = Button(frame, text='%', height=4, width=11, font=35, command=percent)
+percent.grid(row=4, column=0, columnspan=2)
+
+equal = Button(frame, text='=', height=4, width=11, font=35, command=equals)
+equal.grid(row=4, column=2, columnspan=2)
 
 window.mainloop()
