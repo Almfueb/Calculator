@@ -18,13 +18,16 @@ aritmathic operations.
 
 # How To Use
 
-1. Clone the repository to your local machine:
+1. Clone the repository to your local machine :
     git clone https://github.com/Almfueb/Calculator
 
-2. Navigate to the project directory:
+2. Navigate to the project directory :
     cd project
 
-3. Run the Calculator:
+3. Installing the library : 
+    pip install tkinter
+
+4. Run the Calculator :
     py Calculator.py
 
 
@@ -46,4 +49,5 @@ For the Color Selection : https://htmlcolorcodes.com/
     Rein Cornelius
     Email: procodboi@gmail.com
     GitHub: Almfueb
+    
     Happy coding!
